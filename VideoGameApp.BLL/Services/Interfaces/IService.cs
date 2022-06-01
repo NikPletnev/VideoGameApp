@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace VideoGameApp.BLL.Services
 {
-    public interface IService<T>
+    public interface IService<S>
     {
-        Task<int> AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        Task<int> AddAsync(S entity);
+        abstract Task UpdateAsync(S entity, int id);
+        Task DeleteAsync(S entity);
         Task DeleteAsync(int id);
-        Task<List<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
+        Task<List<S>> GetAllAsync();
+        Task<S> GetByIdAsync(int id);
     }
 }

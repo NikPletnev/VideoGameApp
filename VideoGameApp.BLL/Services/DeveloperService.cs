@@ -10,72 +10,21 @@ using VideoGameApp.DAL.Repositories;
 
 namespace VideoGameApp.BLL.Services
 {
-    public class DeveloperService : IDeveloperService
+    public class DeveloperService : BaseService<DeveloperModel, Developer>, IDeveloperService
     {
-        private readonly IRepository<Developer> _repository;
-        private readonly IMapper _mapper;
-
-        public DeveloperService(IRepository<Developer> developerRepository, IMapper mapper)
+        private readonly IDeveloperRepository _developerRepository;
+        public DeveloperService(IDeveloperRepository developerRepository, IMapper mapper) : base(developerRepository, mapper)
         {
-            _repository = developerRepository;
-            _mapper = mapper;
+            _developerRepository = developerRepository;
         }
-        public async Task<int> AddAsync(DeveloperModel entity)
+        public async Task AddGameAsync(GameModel game)
         {
-            if(entity == null)
-            {
-                throw new ArgumentNullException("Not enough data to create entity");
-            }
-            return await _repository.AddAsync(_mapper.Map<Developer>(entity));
+            await _developerRepository.AddGameAsync(_mapper.Map<Game>(game));
         }
 
-        public Task AddGameAsync(Game game)
+        public async Task RemoveGameAsync(GameModel game)
         {
-            throw new NotImplementedException();
+            await _developerRepository.DeleteGameAsync(_mapper.Map<Game>(game));
         }
-
-        public async Task DeleteAsync(DeveloperModel entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("Not enough data to create entity");
-            }
-            await _repository.DeleteAsync(_mapper.Map<Developer>(entity));
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            await _repository.DeleteAsync(id);
-        }
-
-        public async Task<List<DeveloperModel>> GetAllAsync()
-        {
-            return _mapper.Map<List<DeveloperModel>>(await _repository.GetAllAsync());
-        }
-
-        public async Task<DeveloperModel> GetByIdAsync(int id)
-        {
-            return _mapper.Map<DeveloperModel>(await _repository.GetByIdAsync(id));
-        }
-
-        public Task RemoveGameAsync(Game game)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task UpdateAsync(DeveloperModel entity)
-        {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("Not enough data to create entity");
-            }
-            var oldEntity = await _repository.GetByIdAsync(entity.Id);
-            if (oldEntity == null)
-            {
-                throw new ArgumentNullException("Not enough data to create entity");
-            }
-            await _repository.UpdateAsync(oldEntity, _mapper.Map<Developer>(entity));
-        }
-
     }
 }

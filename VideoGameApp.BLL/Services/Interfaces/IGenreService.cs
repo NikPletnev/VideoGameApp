@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VideoGameApp.BLL.Models;
-using VideoGameApp.DAL.Entities;
 
 namespace VideoGameApp.BLL.Services
 {
-    public interface IDeveloperService : IService<DeveloperModel>
+    public interface IGenreService : IService<GenreModel>
     {
-        Task AddGameAsync(GameModel game);
-        Task RemoveGameAsync(GameModel game);
+        Task AddGameAsync(int genreId, int gameId);
+        Task DeleteGameAsync(int genreId, int gameId);
     }
 }
