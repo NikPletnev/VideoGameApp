@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoGameApp.API", "VideoGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoGameApp.BLL", "VideoGameApp.BLL\VideoGameApp.BLL.csproj", "{5A48025A-5B2D-427F-AE1A-AE58E58BAD0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VIdeoGameApp.DAL", "VIdeoGameApp.DAL\VIdeoGameApp.DAL.csproj", "{AA7A68B1-180C-42A3-B966-343BF41D1112}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoGameApp.DAL", "VIdeoGameApp.DAL\VideoGameApp.DAL.csproj", "{AA7A68B1-180C-42A3-B966-343BF41D1112}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
