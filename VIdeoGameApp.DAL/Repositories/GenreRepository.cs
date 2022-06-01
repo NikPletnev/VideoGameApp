@@ -8,7 +8,7 @@ using VideoGameApp.DAL.Entities;
 
 namespace VideoGameApp.DAL.Repositories
 {
-    public class GenreRepository : IRepository<Genre>
+    public class GenreRepository : IGenreRepository
     {
         private readonly VideoGameAppContext _context;
 
@@ -17,38 +17,54 @@ namespace VideoGameApp.DAL.Repositories
             _context = context;
         }
 
-        public async Task<int> Add(Genre entity)
+        public async Task<int> AddAsync(Genre entity)
         {
             var genreId = (await _context.Genres.AddAsync(entity)).Entity.Id;
             await _context.SaveChangesAsync();
             return genreId;
         }
 
-        public async Task Delete(Genre entity)
+        public async Task AddGameAsync(Genre genre, Game game)
         {
-            _context.Genres.Remove(entity);
+            genre.Games.Add(game);
+            game.Genres.Add(genre);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(Genre entity)
         {
-            var entity = await GetById(id);
             _context.Genres.Remove(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Genre>> GetAll()
+        public async Task DeleteAsync(int id)
+        {
+            var entity = await GetByIdAsync(id);
+            _context.Genres.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteGameAsync(Genre genre, Game game)
+        {
+            genre.Games.Remove(game);
+            game.Genres.Remove(genre);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Genre>> GetAllAsync()
         {
             return await _context.Genres
                    .ToListAsync();
         }
 
-        public async Task<Genre> GetById(int id)
+        public async Task<Genre> GetByIdAsync(int id)
         {
 
              return await _context.Genres.Where(g => g.Id == id)
                     .FirstOrDefaultAsync();
         }
 
-        public async Task Update(Genre entity, Genre model)
+        public async Task UpdateAsync(Genre entity, Genre model)
         {
             entity.Name = model.Name;
             entity.Games = model.Games;

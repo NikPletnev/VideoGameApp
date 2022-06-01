@@ -8,7 +8,7 @@ using VideoGameApp.DAL.Entities;
 
 namespace VideoGameApp.DAL.Repositories
 {
-    public class DeveloperRepository : IRepository<Developer>
+    public class DeveloperRepository : IDeveloperRepository
     {
         private readonly VideoGameAppContext _context;
 
@@ -17,37 +17,53 @@ namespace VideoGameApp.DAL.Repositories
             _context = context;
         }
 
-        public async Task<int> Add(Developer entity)
+        public async Task<int> AddAsync(Developer entity)
         {
             var developerId = (await _context.Developers.AddAsync(entity)).Entity.Id;
             await _context.SaveChangesAsync();
             return developerId;
         }
 
-        public async Task Delete(Developer entity)
+        public async Task AddGameAsync(Game game)
         {
-            _context.Developers.Remove(entity);
+            var developer = await _context.Developers.Where(d => d.Id == game.DeveloperStudio.Id).FirstOrDefaultAsync();
+            developer.Games.Add(game);
+            await  _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task DeleteAsync(Developer entity)
         {
-            var entity = await GetById(id);
             _context.Developers.Remove(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Developer>> GetAll()
+        public async Task DeleteAsync(int id)
+        {
+            var entity = await GetByIdAsync(id);
+            _context.Developers.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteGameAsync(Game game)
+        {
+            var developer = await _context.Developers.Where(d => d.Id == game.DeveloperStudio.Id).FirstOrDefaultAsync();
+            developer.Games.Remove(game);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Developer>> GetAllAsync()
         {
             return await _context.Developers
                 .ToListAsync();
         }
 
-        public async Task<Developer> GetById(int id)
+        public async Task<Developer> GetByIdAsync(int id)
         {
             return await _context.Developers.Where(g => g.Id == id)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task Update(Developer entity, Developer model)
+        public async Task UpdateAsync(Developer entity, Developer model)
         {
             entity.Name = model.Name;
             entity.Games = model.Games;
