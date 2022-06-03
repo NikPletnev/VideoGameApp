@@ -24,9 +24,9 @@ namespace VideoGameApp.API.Controllers
         }
 
         [HttpPatch("addGame")]
-        public async Task<ActionResult> AddGameToDeveloper(GameInputModel model)
+        public async Task<ActionResult> AddGameToDeveloper(GameInputModel model, int developerId)
         {
-            await _developerService.AddGameAsync(_mapper.Map<GameModel>(model));
+            await _developerService.AddGameAsync(_mapper.Map<GameModel>(model), developerId);
             return Ok();
         }
 
@@ -59,7 +59,7 @@ namespace VideoGameApp.API.Controllers
         }
 
         [HttpPatch("update")]
-        public async Task<ActionResult> UpdateDeveloper(DeveloperInputModel dev, int id)
+        public async Task<ActionResult> UpdateDeveloper(DelevoperUpdateInputModel dev, int id)
         {
             await _developerService.UpdateAsync(_mapper.Map<DeveloperModel>(dev), id);
             return Ok();

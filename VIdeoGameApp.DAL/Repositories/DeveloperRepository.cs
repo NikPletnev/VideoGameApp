@@ -22,6 +22,10 @@ namespace VideoGameApp.DAL.Repositories
         public async Task AddGameAsync(Game game)
         {
             var developer = await _context.Developers.Where(d => d.Id == game.DeveloperStudio.Id).FirstOrDefaultAsync();
+            if (developer.Games == null)
+            {
+                developer.Games = new List<Game>();
+            }
             developer.Games.Add(game);
             await _context.SaveChangesAsync();
         }

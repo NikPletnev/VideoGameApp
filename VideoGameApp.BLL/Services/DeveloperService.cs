@@ -12,8 +12,9 @@ namespace VideoGameApp.BLL.Services
         {
             _developerRepository = developerRepository;
         }
-        public async Task AddGameAsync(GameModel game)
+        public async Task AddGameAsync(GameModel game, int developerId)
         {
+            game.DeveloperStudio = new DeveloperModel() { Id = developerId};
             await _developerRepository.AddGameAsync(_mapper.Map<Game>(game));
         }
 

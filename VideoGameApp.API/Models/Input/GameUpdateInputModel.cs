@@ -1,6 +1,6 @@
 ﻿namespace VideoGameApp.API.Models
 {
-    public class DelevoperUpdateInputModel : DeveloperInputModel
+    public class GameUpdateInputModel : GameInputModel
     {
         public int Id { get; set; }
     }

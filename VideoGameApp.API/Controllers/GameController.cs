@@ -45,9 +45,23 @@ namespace VideoGameApp.API.Controllers
         }
 
         [HttpPatch("update")]
-        public async Task<ActionResult> Update(GameInputModel game, int id)
+        public async Task<ActionResult> Update(GameUpdateInputModel game, int id)
         {
             await _gameService.UpdateAsync(_mapper.Map<GameModel>(game), id);
+            return Ok();
+        }
+
+        [HttpPatch("addGenre")]
+        public async Task<ActionResult> AddGenreToGame(int genreId, int gameId)
+        {
+            await _gameService.AddGenreAsync(genreId, gameId);
+            return Ok();
+        }
+
+        [HttpPatch("deleteGenre")]
+        public async Task<ActionResult> DeleteGenreFromGame(int genreId, int gameId)
+        {
+            await _gameService.DeleteGenreAsync(genreId, gameId);
             return Ok();
         }
     }

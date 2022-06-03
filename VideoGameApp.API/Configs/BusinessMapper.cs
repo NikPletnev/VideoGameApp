@@ -13,8 +13,15 @@ namespace VideoGameApp.API.Configs
             CreateMap<GenreInputModel, GenreModel>();
 
             CreateMap<DeveloperModel, DeveloperOutputModel>();
+            CreateMap<DeveloperModel, DeveloperWithoutGamesOutputModel>();
+
             CreateMap<GameModel, GameOutputModel>();
+            CreateMap<GameModel, GameWithoutDeveloperOutputModel>();
+            CreateMap<GameModel, GameWithoutGenresOutputModel>();
+
             CreateMap<GenreModel, GenreOutputModel>();
+            CreateMap<GenreModel, GenreWithoutGamesOutputModel>();
+
         }
     }
 }

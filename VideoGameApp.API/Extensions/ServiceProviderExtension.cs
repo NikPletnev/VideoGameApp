@@ -28,6 +28,7 @@ namespace VideoGameApp.API.Extensions
             services.AddDbContext<VideoGameAppContext>(
                 options =>
                 {
+                    options.UseLazyLoadingProxies();
                     options.UseSqlServer(
                 @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=VideoGameApp;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         });
