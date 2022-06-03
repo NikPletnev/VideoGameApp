@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VideoGameApp.DAL.Entities;
 
 namespace VideoGameApp.DAL.Repositories
@@ -28,7 +23,7 @@ namespace VideoGameApp.DAL.Repositories
         {
             var developer = await _context.Developers.Where(d => d.Id == game.DeveloperStudio.Id).FirstOrDefaultAsync();
             developer.Games.Add(game);
-            await  _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Developer entity)

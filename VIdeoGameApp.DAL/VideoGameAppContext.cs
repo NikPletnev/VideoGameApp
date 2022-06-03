@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using VideoGameApp.DAL.Entities;
 
 namespace VideoGameApp.DAL
@@ -20,5 +22,8 @@ namespace VideoGameApp.DAL
             modelBuilder.Entity<Developer>().ToTable("Developers");
             modelBuilder.Entity<Genre>().ToTable("Genres");
         }
+        
     }
+
+
 }

@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VideoGameApp.DAL.Entities;
 
 namespace VideoGameApp.DAL.Repositories
@@ -60,8 +55,8 @@ namespace VideoGameApp.DAL.Repositories
         public async Task<Genre> GetByIdAsync(int id)
         {
 
-             return await _context.Genres.Where(g => g.Id == id)
-                    .FirstOrDefaultAsync();
+            return await _context.Genres.Where(g => g.Id == id)
+                   .FirstOrDefaultAsync();
         }
 
         public async Task UpdateAsync(Genre entity, Genre model)
